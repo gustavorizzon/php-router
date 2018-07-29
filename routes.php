@@ -15,3 +15,10 @@ Route::check('/controller', 'Example@helloWorld');
 Route::check('/invalid-controller', 'Fake\\Example@method');
 
 Route::check('/invalid-method', 'Example@invalid');
+
+Route::check('/{lang}/check', function () {
+	$arg = func_get_arg(0);
+	echo 'You requested the language: ' . $arg['lang'];
+});
+
+Route::check('/controller-args/{myName}/{myAge}', 'Example@showArgs');
