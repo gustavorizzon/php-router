@@ -8,4 +8,9 @@ class Request
 	{
 		return explode('?', getenv('REQUEST_URI'))[0];
 	}
+
+	public static function getRequestedURIExploded (string $delimiter = '/')
+	{
+		return explode($delimiter, self::getRequestedURI());
+	}
 }
