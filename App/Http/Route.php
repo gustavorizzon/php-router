@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Classes;
+namespace App\Http;
 
-use App\Classes\Request;
+use App\Http\Request;
 
 class Route
 {
