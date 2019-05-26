@@ -21,17 +21,16 @@ require_once(__DIR__ . DIRECTORY_SEPARATOR . 'constants' . DIRECTORY_SEPARATOR .
  * the needed classes for the current context.
  */
 spl_autoload_register(function ($class) {
-	// Gets a fully qualified path for the class
 	$class = APP_DIR . DIRECTORY_SEPARATOR . str_replace('\\', DIRECTORY_SEPARATOR, $class) . '.php';
-
-	// If the class doesn't exists, throws an Exception
 	if (!file_exists($class)) {
-		die("Class not found: {$class}");
+		throw new \Exception("Class not found: {$class}");
 	}
-
-	// Requires the requested class
 	require_once($class);
 });
 
-// Requiring the routes file
-require_once(APP_DIR . DIRECTORY_SEPARATOR . 'routes.php');
+// Booting the application router
+try {
+	App\Http\Router::getRouter()->boot();
+} catch (\Exception $exception) {
+	printf('PHP-ROUTER-ERROR: %s', $exception->getMessage());
+}
